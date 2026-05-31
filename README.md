@@ -195,18 +195,21 @@ int b = square(a);
 return b;
 }
 ```
+
 Задания:  
 Получите IR для -O0.  
 Получите IR для -O2. Встроилась ли функция?  
-Примените -always-inline и сравните с предыдущими  оптимизациями.  
+Примените -always-inline и сравните с предыдущими  оптимизациями (у меня не работает этот флаг).  
 Постройте CFG до и после.    
 Сделайте вывод об условиях встраивания функций в LLVM.  
   
-  1. -O0
-  <img width="1918" height="974" alt="image" src="https://github.com/user-attachments/assets/242401e2-43cc-4096-813e-d16c4fabc278" />    
-  <img width="1914" height="1036" alt="image" src="https://github.com/user-attachments/assets/50c104c8-f063-4954-a618-cdce7f1e538e" />    
-  3. -O2
-  <img width="912" height="187" alt="image" src="https://github.com/user-attachments/assets/a885686d-3fa2-4d73-9bcb-0d5cb1b0453f" />    
-  <img width="1914" height="1023" alt="image" src="https://github.com/user-attachments/assets/e208f07b-e027-449b-b985-a2c4b238dce0" />    
-  3. CFG
-  <img width="912" height="187" alt="image" src="https://github.com/user-attachments/assets/a6e584d5-24ab-46c7-a92a-b3531b7728ea" />    
+  1. IR до оптимизации -O0  
+  <img width="1394" height="858" alt="11" src="https://github.com/user-attachments/assets/42c57c96-7728-4369-bddb-9f7006068426" />  
+  3. IR после оптимизации -O2  
+  <img width="1382" height="526" alt="22" src="https://github.com/user-attachments/assets/10754c13-c9ca-42e5-9e5b-27342769c4fa" />  
+
+  3. CFG. Слево до оптимизации, справо после.
+  <img width="1111" height="495" alt="33" src="https://github.com/user-attachments/assets/1ed9e9c2-dd44-479d-ac96-ff73ab23158e" />
+
+
+     
