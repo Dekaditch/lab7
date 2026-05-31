@@ -1,207 +1,212 @@
-﻿﻿Лабораторная работа 1. Разработка пользовательского интерфейса (GUI) для языкового процессора  
-  ---
-Цель работы.  
-Создание кроссплатформенного графического интерфейса (GUI) для языкового процессора в виде специализированного текстового редактора.
+Лабораторная работа 7. Анализ и преобразование кода с использованием Clang и LLVM
+---
+Описание работы  
+Цель работы  
+Познакомиться с инструментарием Clang и LLVM, освоить получение абстрактного синтаксического дерева (AST) и промежуточного представления (LLVM IR) для кода на C/C++, научиться применять базовые оптимизации, строить графы потока управления (CFG), а также анализировать влияние оптимизаций на различные синтаксические конструкции языка.  
 
-Студент группы АВТ-314  
-Болтенков Евгений Олегович
+Постановка задачи  
+Необходимо выполнить следующие шаги:  
 
-Полностью рабочий текстовый редактор с GUI для языкового процессора.
-Реализованы функции сохранения и создания текстовых файлов, операции с текстом (вырезание, копирование, вставление, отмена и повтор).
+Установка среды  
+Установить Clang, LLVM, opt и Graphviz (например, в Ubuntu 26.04).  
 
-Используемые технологии: С#, Windows Forms, Visual Studio 2022 community edition.
+Работа с AST  
+Сгенерировать абстрактное синтаксическое дерево для заданного C/C++‑файла.  
 
-Инструкция по сборке и запуску:  
+Генерация LLVM IR  
+Получить промежуточное представление кода без оптимизаций (-O0) и с оптимизациями (-O2).  
   
-Открыть файл setup.exe, согласиться на установку.  
-Запуск файла происходит при открытии файла lab1.exe.
+Оптимизация IR  
+Применить оптимизации с помощью opt и/или флагов Clang, сравнить изменения.  
 
-Описание интерфейса и функций (руководство пользователя):  
-Открывая файл, нас встречает полностью пустой, но готовый к работе текстовый редактор.   
-<img width="802" height="458" alt="изображение_2026-02-27_215214173" src="https://github.com/user-attachments/assets/288135f4-9eb4-4137-ad39-f2c5ddf55c62" />  
-В пустом светлой области мы можем набирать текст записывая его в файл.  
-В самой верхней части приложения есть 4 выпадающих окна и 1 кнопка, но на данный момент работают лишь 3 окна, со всеми вложенными в них функциями. (Файл, Правка, Справка).  
+Построение CFG  
+Построить граф потока управления для одной или нескольких функций.  
 
-Чуть ниже расположена панель инструментов для быстрого доступа, разделенные на категории.   
-Первая категория - работа с файлом (создание, открытие и сохранение)
-<img width="803" height="458" alt="image" src="https://github.com/user-attachments/assets/5988e2bd-f1d7-4c8d-8dd7-5cb608e59475" />  
+Индивидуальное задание (по варианту)  
+Выполнить анализ конкретной синтаксической конструкции в соответствии с вариантом. Сформулировать, как LLVM обрабатывает выбранную конструкцию, какие оптимизации применяются.  
 
-Самая первая кнопка слева - кнопка создания файла, при нажатии на него:
-Очищается содержимое области ввода текста
-Обновляется заголовок окна на "lab1 - Новый документ"  
+Выводы  
+Ответить на контрольные вопросы  
 
-Далее идут кнопки отвечающие за отмену или повтор действия (горячие клавиши ctrl+z ctrl+y).
-<img width="802" height="458" alt="Снимок экрана 2026-02-27 1231231" src="https://github.com/user-attachments/assets/c781f9d3-4beb-482a-814b-b39c52fd9e8d" />  
-Кнопка отмены (ctrl+z) (стрелка влево) становится активной тогда, когда вы что-то ввели (чтобы что-то отменить, нужно что-то сделать), а кнопка повторить (ctrl+y) (стрелка вправо) отвечает за отмену кнопки отмены, то есть повторяет отмененное действие.  
+Общее задание  
+1. Исходный код  
+<img width="254" height="235" alt="image" src="https://github.com/user-attachments/assets/36659464-663a-429f-b4ea-3ac674ab7da2" />  
 
-Слудющая секция отвечает за работу с текстом (горячие клавиши ctrl+с ctrl+x ctrl+v).
-<img width="802" height="458" alt="Снимок экрана 2026-02-27 123121" src="https://github.com/user-attachments/assets/d3df2a95-3fac-4614-b684-bfd22c498523" />  
-Первая кнопка этой секции - копировать (ctrl+с) (выглядит как наложенный друг на друга документ), становится активной при выделении текста. При нажатии на нее, выделенный текст копируется в буфер обмена.  
-Вторая кнопка - вырезать (ctrl+x) (выглядит как ножницы), также становится доступной при выделении текста. При нажатии на нее, удаляется выделенный текст, но сохраняется в буфер обмена.  
-Третья и последняя кнопка этой секции - вставка (ctrl+v) (выглядит как пленшет), при нажатии на нее вставится скопированный текст.  
+2. Работа с AST  
+<img width="960" height="489" alt="image" src="https://github.com/user-attachments/assets/7070b771-bf6f-4abe-908a-810c3853d845" />  
 
-Следующая секция является заглушкой для будущих лабораторных работ, состоит из одной кнопки "Пуск", выглядит как кнопка плей.  
-<img width="802" height="458" alt="Снимок экрана 2026-02-27 123" src="https://github.com/user-attachments/assets/16f5ed31-7123-40d1-95f8-7a75351db711" />  
-При нажатии на нее выведется сообщение о том, что данная функция будет реализована позже.  
+3. Генерация LLVM IR
+```llvm
+; ModuleID = 'main.c'
+source_filename = "main.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
-Следующая секция служит для вывода справочной информации о работе с приложением и о самом приложении.  
-<img width="802" height="458" alt="Снимок экрана 2026-02-27 12" src="https://github.com/user-attachments/assets/a1d32dd4-e181-4b4d-aada-1870899ec171" />  
-При нажатии на первую кнопку (выглядит как знак вопроса) выведется справка о программе.  
-<img width="336" height="243" alt="image" src="https://github.com/user-attachments/assets/50b5e959-342f-48ef-a782-db41be546036" />  
-При нажатии на вторую кнопку (F1) (выглядит как черный круг с буквой i) выведется руководство по использованию приложения.  
-<img width="586" height="493" alt="image" src="https://github.com/user-attachments/assets/d0487d0e-7de1-420a-9c83-67c48c241eee" />  
+@.str = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
 
-Перейдем к выпадающим окнам.  
-При нажатии на "Файл" отобразится следующее окно.   
-<img width="182" height="114" alt="image" src="https://github.com/user-attachments/assets/ecad45a3-609f-427c-bca1-38e383f166c2" />  
-Первые три кнопки (Создать, Открыть, Сохранить) отвечают за те же функции, что и их аналоги на панели инструментов.  
-Но тут есть 2 новые кнопки:  
-Сохранить как - позволяет сохранить файл как новый, без перезаписи старого.  
-Выход - просто закрывает программу.  
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @square(i32 noundef %0) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  %3 = load i32, ptr %2, align 4
+  %4 = load i32, ptr %2, align 4
+  %5 = mul nsw i32 %3, %4
+  ret i32 %5
+}
 
-При нажатии на "Правка" отобразится следующее окно.  
-<img width="200" height="158" alt="image" src="https://github.com/user-attachments/assets/af48961e-3827-4051-b39b-845cfa2b25c9" />  
-Тут также, все функции работают аналогично с кнопками на панели инструментов, но есть 2 новые:  
-Удалить - работает аналогично с вырезанием, но не сохраняет текст в буфер обмена.  
-Выделить все (ctrl+a) - выделяет весь текст введенный в поле.  
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+  %1 = alloca i32, align 4
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  store i32 0, ptr %1, align 4
+  store i32 5, ptr %2, align 4
+  %4 = load i32, ptr %2, align 4
+  %5 = call i32 @square(i32 noundef %4)
+  store i32 %5, ptr %3, align 4
+  %6 = load i32, ptr %3, align 4
+  %7 = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %6)
+  ret i32 0
+}
 
-При нажатии на "Текст" отобразится следующее окно.  
-<img width="223" height="158" alt="image" src="https://github.com/user-attachments/assets/8fbfbf76-07f6-4513-b5e6-5a6331aa30a2" />  
-Все кнопки этого окна, на данный момент не реализованы, при нажатии на них выведется окно об их реализации в будущем.  
+declare i32 @printf(ptr noundef, ...) #1
 
-При нажатии на "Пуск" выведется сообщение о будущей реализации данной функции.  
-<img width="802" height="458" alt="Снимок экрана 2026-02-27 1" src="https://github.com/user-attachments/assets/790aed50-5907-4c96-8597-9b349bfa4c03" />  
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
 
-При нажатии на "Справка" отобразится следующее окно.  
-<img width="176" height="48" alt="image" src="https://github.com/user-attachments/assets/b7802985-2308-49c7-8180-01ace1dc3f3b" />  
-Данные функции делают тоже самое, что и их аналоги в последней секции.  
-При нажатии на "Вызов справки" выведется информация о работе с приложением.  
-При нажатии на "О программе" выведется тоже самое, что и при нажатии кнопки со значком вопроса из панели инструментов.  
+!llvm.module.flags = !{!0, !1, !2, !3, !4}
+!llvm.ident = !{!5}
 
-Ограничения: нет.  
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 8, !"PIC Level", i32 2}
+!2 = !{i32 7, !"PIE Level", i32 2}
+!3 = !{i32 7, !"uwtable", i32 2}
+!4 = !{i32 7, !"frame-pointer", i32 2}
+!5 = !{!"Ubuntu clang version 21.1.8 (6ubuntu1)"}
+```
+4. Оптимизация IR
+main_O0.ll
+```llvm
+; ModuleID = 'main.c'
+source_filename = "main.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
 
+@.str = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @square(i32 noundef %0) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  %3 = load i32, ptr %2, align 4
+  %4 = load i32, ptr %2, align 4
+  %5 = mul nsw i32 %3, %4
+  ret i32 %5
+}
+
+; Function Attrs: noinline nounwind optnone uwtable
+define dso_local i32 @main() #0 {
+  %1 = alloca i32, align 4
+  %2 = alloca i32, align 4
+  %3 = alloca i32, align 4
+  store i32 0, ptr %1, align 4
+  store i32 5, ptr %2, align 4
+  %4 = load i32, ptr %2, align 4
+  %5 = call i32 @square(i32 noundef %4)
+  store i32 %5, ptr %3, align 4
+  %6 = load i32, ptr %3, align 4
+  %7 = call i32 (ptr, ...) @printf(ptr noundef @.str, i32 noundef %6)
+  ret i32 0
+}
+
+declare i32 @printf(ptr noundef, ...) #1
+
+attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.module.flags = !{!0, !1, !2, !3, !4}
+!llvm.ident = !{!5}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 8, !"PIC Level", i32 2}
+!2 = !{i32 7, !"PIE Level", i32 2}
+!3 = !{i32 7, !"uwtable", i32 2}
+!4 = !{i32 7, !"frame-pointer", i32 2}
+!5 = !{!"Ubuntu clang version 21.1.8 (6ubuntu1)"}
+```
+main_O2.ll
+```llvm
+; ModuleID = 'main.c'
+source_filename = "main.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-pc-linux-gnu"
+
+@.str = private unnamed_addr constant [4 x i8] c"%d\0A\00", align 1
+
+; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable
+define dso_local i32 @square(i32 noundef %0) local_unnamed_addr #0 {
+  %2 = mul nsw i32 %0, %0
+  ret i32 %2
+}
+
+; Function Attrs: nofree nounwind uwtable
+define dso_local noundef i32 @main() local_unnamed_addr #1 {
+  %1 = tail call i32 (ptr, ...) @printf(ptr noundef nonnull dereferenceable(1) @.str, i32 noundef 25)
+  ret i32 0
+}
+
+; Function Attrs: nofree nounwind
+declare noundef i32 @printf(ptr noundef readonly captures(none), ...) local_unnamed_addr #2
+
+attributes #0 = { mustprogress nofree norecurse nosync nounwind willreturn memory(none) uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { nofree nounwind uwtable "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #2 = { nofree nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cmov,+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+
+!llvm.module.flags = !{!0, !1, !2, !3}
+!llvm.ident = !{!4}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 8, !"PIC Level", i32 2}
+!2 = !{i32 7, !"PIE Level", i32 2}
+!3 = !{i32 7, !"uwtable", i32 2}
+!4 = !{!"Ubuntu clang version 21.1.8 (6ubuntu1)"}
+```
+5. Сравнение оптимизаций
+<img width="772" height="713" alt="image" src="https://github.com/user-attachments/assets/68d4e73a-ef49-4605-aede-71426c0b7d25" />  
+Изменения после оптимизации:  
+
+1. Переменные типа alloca были удалены;  
+2. Код переведён в SSA-форму;  
+3. Оптимизация улучшила читаемость и упростила поток управления.  
+
+6. Построение CFG для оптимизированного LLVM IR  
+<img width="735" height="171" alt="image" src="https://github.com/user-attachments/assets/045d1174-b77f-4283-ace5-85ac6ea9dab1" />
+<img width="339" height="172" alt="image" src="https://github.com/user-attachments/assets/a65d7252-a6b3-4a54-9bbe-8f2b2f8d6ce6" />
+
+Индивидуальное задание
 ---
-Лабораторная работа 2. Разработка лексического анализатора (сканера)  
----
-Постановка задачи.
-Разработать лексический анализатор (сканер) в соответствии с индивидуальным вариантом задания, интегрировать его в приложение из лабораторной работы №1 и обеспечить наглядный вывод результатов.  
-
-Требования к реализации сканера:  
-Спроектировать диаграмму состояний конечного автомата, реализующего сканер, согласно варианту задания.  
-Разработать программный модуль лексического анализа, который:  
-принимает на вход строку (исходный текст программы);    
-выделяет все допустимые лексемы согласно варианту;   
-классифицирует лексемы по типам (например: "ключевое слово", "идентификатор", "число", "оператор", "разделитель").  
-любые символы, не соответствующие ни одному из допустимых типов лексем, считать недопустимыми и выводить сообщение об ошибке с указанием позиции.  
-учитывает многострочность входного текста.  
-Требования к интеграции и интерфейсу:  
-Встроить сканер в ранее разработанный интерфейс и связать его с кнопкой "Пуск" и соответствующим пунктом меню.    
-Область вывода результатов (элемент DataGridView или аналогичная таблица) должна содержать следующие столбцы:  
-Условный код (числовой идентификатор типа лексемы).  
-Тип лексемы (текстовое описание).  
-Лексема (выделенная подстрока).  
-Местоположение (номер строки, начальная и конечная позиция символов).  
-Реализовать навигацию по ошибкам: при щелчке на сообщении об ошибке в таблице результатов курсор в области редактирования должен устанавливаться на позицию недопустимого символа.  
-
-Вариант работы - 78 (Создание функции языка C/C++)  
-int sum(int x, int y, int z) {  
-    return x + (y * z);  
-};  
-
-int d(int d) {  
-    return x;  
-};    
+```cpp
+inline int square(int x) {
+return x * x;
+}
+int main() {
+int a = 5;
+int b = square(a);
+return b;
+}
+```
+Задания:  
+Получите IR для -O0.  
+Получите IR для -O2. Встроилась ли функция?  
+Примените -always-inline и сравните с предыдущими  оптимизациями.  
+Постройте CFG до и после.    
+Сделайте вывод об условиях встраивания функций в LLVM.  
   
-int calc(int a, int b) {  
-    return a + b * c - d / e;  
-};    
-Диаграмма состояний:  
-<img width="341" height="687" alt="image" src="https://github.com/user-attachments/assets/3fd02867-d287-45ac-a132-d6914a2ab754" />  
-Примеры работы программы:  
-<img width="713" height="1032" alt="image" src="https://github.com/user-attachments/assets/e5a6f12d-a174-4093-8700-f77863ec964d" />  
-<img width="713" height="1032" alt="image" src="https://github.com/user-attachments/assets/e67b86e8-95f5-4679-8ced-31fe19118ce6" />  
-
-
----
-Лабораторная работа 3. Разработка синтаксического анализатора (парсера).  
----
-
-Цель работы.
-Изучить назначение и принципы работы синтаксического анализатора в структуре компилятора. Спроектировать грамматику, построить соответствующую схему метода анализа грамматики и выполнить программную реализацию парсера с нейтрализацией синтаксических ошибок методом Айронса. Интегрировать разработанный модуль в ранее созданный графический интерфейс языкового процессора.
-
-Постановка задачи.
-Разработать синтаксический анализатор (парсер) в соответствии с индивидуальным вариантом курсовой работы, интегрировать его в приложение из лабораторной работы №1 и обеспечить наглядный вывод результатов анализа.  
-
-Вариант работы - 78 (Создание функции языка C/C++)   
-Правильные примеры  
-int sum(int x, int y, int z) {
-    return x + (y * z);
-};
-
-int d(int d) {
-    return x;
-};  
-
-int calc(int a, int b) {
-    return a + b * c - d / e;
-};  
-
-2 Разработанная грамматика
-Определим грамматику создания функции языка C/C++ G[\<FTYPE>] в нотации Хомского с продукциями P:  
-
-1 \<FTYPE> → TYPE \<FSPACE>   
-2 \<FSPACE> → '\_' \<FID>   
-3 \<FID> → IDENTIFIER \<OPENQ>  
-4 \<OPENQ> → '(' \<PTYPE>  
-5 \<PTYPE> → TYPE \<PSPACE>  
-6 \<PSPACE> → '\_'  \<PID>  
-7 \<PID> → IDENTIFIER \<COMMA> | IDENTIFIER \<CLOSEQ>  
-8 \<COMMA> → ',' \<PTYPE>  
-9 \<CLOSEQ> → ')' \<OPENF>  
-10 \<OPENF> → '{' \<RETURN>  
-12 \<RETURN> → 'return' \<BSPACE>  
-13 \<BSPACE> → '\_' \<BSPACE>  
-14 \<BSPACE> → \<E> \<COLON>  
-15 \<COLON> → ';' \<CLOSEF>  
-16 \<CLOSEF> → '}' \<COLONEND>  
-17 \<E> → \<T> \<A>  
-18 \<A> → '+' \<T> \<A> | '-' \<T> \<A> | ε  
-19 \<T> → \<O> \<B>  
-20 \<B> → '*' \<O> \<B> | '/' \<O> \<B> | ε  
-21 \<O> → 'id' '('\<E>')'  
-22 \<COLONEND> → ';'  
-23 IDENTIFIER → letter \<INDENTIFIER_REM>  
-24 \<IDENTIFIER_REM> → letter | digit | ε  
-letter -> ‘a’ | ‘b’ | … | ‘z’ | ‘A’ | ‘B’ | … | ‘Z’  
-digit -> ‘0’ | ‘1’ | … | ‘9’  
-TYPE -> ‘int’ | ‘float’ | 'double' | 'long'   
-  
-Следуя введенному формальному определению грамматики, представим G[\<FTYPE>] ее составляющими:  
-<img width="1069" height="67" alt="image" src="https://github.com/user-attachments/assets/5ac7a93d-a380-4613-a166-2eab57d21eee" />  
-
-
-3 Классификация грамматики  
-Согласно классификации Хомского, полученная порождающая грамматика G[\<FTYPE>] соответствует типу контекстно-свободных, так как правая часть каждой редукции начинается либо с терминального символа, либо с нетерминального, принадлежащего объединённому словарю.  
-A → a, A ∈ V_N  , a ∈ V^* .  
-Грамматика G[\<FTYPE>] не является автоматной, так как не все её редукции начинаются с терминального символа. По этой же причине данная грамматика не является S - грамматикой.    
-
-4 Метод анализа  
-Так как грамматика G[\<FTYPE>] принадлежит классу контекстно-свободных, анализ реализован методом рекурсивного спуска.   
-Идея метода заключается в том, что каждому нетерминалу ставится в соответствие программная функция, которая распознает цепочку, порожденную этим нетерминалом.   
-Эти функции вызываются в соответствии с правилами грамматики и иногда вызывают сами себя, поэтому для реализации необходимо выбрать язык, обладающий рекурсивными возможностями, в нашем случае это язык C#.  
-На рисунке представлен список процедур и последовательность их вызова.  
-<img width="480" height="644" alt="image" src="https://github.com/user-attachments/assets/8706cb39-bfdd-4152-8c8f-517f063bef21" />  
-
-5 Метод Айронса  
-
-Разрабатываемый синтаксический анализатор основан на контекстно-свободной грамматике. При обнаружении лексемы, не соответствующей грамматике, применяется метод нейтрализации ошибки, заключающийся в последовательном удалении символов входной цепочки до тех пор, пока следующий символ не станет допустимым для текущего состояния разбора.  
-
-6 Примеры работы программы  
-<img width="802" height="482" alt="Снимок экрана 2026-05-08 234922" src="https://github.com/user-attachments/assets/ab97e86f-c2b0-49c0-b85c-b045c9a19537" />  
-<img width="802" height="482" alt="Снимок экрана 2026-05-08 234949" src="https://github.com/user-attachments/assets/5dc8e41a-d495-4c9b-9c5d-0fc868d05056" />  
-<img width="802" height="481" alt="image" src="https://github.com/user-attachments/assets/7ea876d8-14da-483d-9f2b-a8bf52a780b3" />  
-
-
-
-
-
+  1. -O0
+  <img width="1918" height="974" alt="image" src="https://github.com/user-attachments/assets/242401e2-43cc-4096-813e-d16c4fabc278" />    
+  <img width="1914" height="1036" alt="image" src="https://github.com/user-attachments/assets/50c104c8-f063-4954-a618-cdce7f1e538e" />    
+  3. -O2
+  <img width="912" height="187" alt="image" src="https://github.com/user-attachments/assets/a885686d-3fa2-4d73-9bcb-0d5cb1b0453f" />    
+  <img width="1914" height="1023" alt="image" src="https://github.com/user-attachments/assets/e208f07b-e027-449b-b985-a2c4b238dce0" />    
+  3. CFG
+  <img width="912" height="187" alt="image" src="https://github.com/user-attachments/assets/a6e584d5-24ab-46c7-a92a-b3531b7728ea" />    
